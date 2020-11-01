@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="woo-core" level="project" />
+    <orderEntry type="library" name="po-uuilib1" level="project" />
+    <orderEntry type="library" name="woo-core1" level="project" />
+    <orderEntry type="library" name="po-uuilib" level="project" />
+    <orderEntry type="module" module-name="woo-core" />
+    <orderEntry type="module" module-name="woo-core1" />
+    <orderEntry type="module" module-name="po-uuilib-201708311009" />
+    <orderEntry type="module" module-name="po-uuilib-2017083110092" />
+    <orderEntry type="module" module-name="po-uuilib-2017083110091" />
+  </component>
+</module>
