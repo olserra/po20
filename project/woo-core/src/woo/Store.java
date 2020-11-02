@@ -38,32 +38,32 @@ public class Store implements Serializable {
   /**
    * Create and register supplier.
    * 
-   * @param id
+   * @param key
    * @param name
    * @param address
    * @param status
    * @return the new supplier.
    */
-  public Supplier registerSupplier(int id, String name, String address, boolean status) throws DuplicateSupplierException {
-    if (_suppliers.containsKey(id))
-      throw new DuplicateSupplierException(id, name, address, status);
-    Supplier supplier = new Supplier(id, name, address, status);
-    _suppliers.put(id, supplier);
+  public Supplier registerSupplier(int key, String name, String address, boolean status) throws DuplicateSupplierException {
+    if (_suppliers.containsKey(key))
+      throw new DuplicateSupplierException(key, name, address, status);
+    Supplier supplier = new Supplier(key, name, address, status);
+    _suppliers.put(key, supplier);
 
   }
 
   /**
    * Remove a supplier.
    * 
-   * @param id
-   *          the supplier's id.
+   * @param key
+   *          the supplier's key.
    * 
    * @return true, if the supplier was removed; false, otherwise.
    */
-  public final boolean removeSupplier(int id) {
-    Supplier supplier = getSupplier(id);
+  public final boolean removeSupplier(int key) {
+    Supplier supplier = getSupplier(key);
     if (supplier != null) {
-      _suppliers.remove(id);
+      _suppliers.remove(key);
       return true;
     }
     return false;
@@ -81,14 +81,14 @@ public class Store implements Serializable {
   /**
    * Get the supplier with the given number.
    * 
-   * @param id
+   * @param key
    *          the supplier's number.
    * 
    * @return the supplier or null if the number does not correspond to a
-   *         valid supplier.
+   *         valkey supplier.
    */
-  public Supplier getSupplier(int id) {
-    return _suppliers.get(id);
+  public Supplier getSupplier(int key) {
+    return _suppliers.get(key);
   }
 
    /**

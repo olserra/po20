@@ -1,21 +1,22 @@
 package woo.app.suppliers;
 
-import pt.tecnico.po.ui.Command;                                                                                                              import pt.tecnico.po.ui.DialogException;                                                                                                      import pt.tecnico.po.ui.Input;                                                                                                                import woo.Storefront;                                                                                                                        //FIXME import other classes
+import pt.tecnico.po.ui.Command;
+import pt.tecnico.po.ui.DialogException;
+import woo.Storefront;
 
 /**
  * Show all suppliers.
  */
 public class DoShowSuppliers extends Command<Storefront> {
 
-  //FIXME add input fields
-
   public DoShowSuppliers(Storefront receiver) {
     super(Label.SHOW_ALL_SUPPLIERS, receiver);
-    //FIXME init input fields
   }
 
   @Override
   public void execute() throws DialogException {
-    //FIXME implement command
+    for (Supplier h : _receiver.getSuppliers())
+      _display.addLine(h.toString());
+    _display.display();
   }
 }

@@ -7,16 +7,15 @@ import pt.tecnico.po.ui.Command;                                                
  */
 public class DoShowSupplierTransactions extends Command<Storefront> {
 
-  //FIXME add input fields
-
   public DoShowSupplierTransactions(Storefront receiver) {
     super(Label.SHOW_SUPPLIER_TRANSACTIONS, receiver);
-    //FIXME init input fields
   }
 
   @Override
   public void execute() throws DialogException {
-    //FIXME implement command
+    for (Transaction h : _receiver.getTransactions())
+      _display.addLine(h.toString());
+    _display.display();
   }
 
 }
