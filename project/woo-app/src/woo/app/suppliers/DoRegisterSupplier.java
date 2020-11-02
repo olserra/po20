@@ -18,9 +18,6 @@ public class DoRegisterSupplier extends Command<Storefront> {
   /** Input field. */
   Input<String> _address;
 
-  /** Input field. */
-  Input<String> _name;
-
   public DoRegisterSupplier(Storefront receiver) {
     super(Label.REGISTER_SUPPLIER, receiver);
     _name = _form.addStringInput(Messages.requestSupplierName());
@@ -36,7 +33,8 @@ public class DoRegisterSupplier extends Command<Storefront> {
       _receiver.addSupplier(_name.value(), _id.value());
       _display.popup(Messages.createdSupplier(_name.value(), _key.value(), _address.value(), _status.value()));
     } catch (DuplicateHolderException e) {
-      _display.popup("DUPLICATE WHILE TRYING; " + Messages.createdHolder(_name.value(), _key.value(), _address.value(), _status.value()));
+      _display.popup("DUPLICATE WHILE TRYING; "
+          + Messages.createdSupplier(_name.value(), _key.value(), _address.value(), _status.value()));
     }
   }
 
