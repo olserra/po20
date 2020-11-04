@@ -2,15 +2,15 @@ package woo;
 
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import woo.exceptions.BadEntryException;
 import java.io.Serializable;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Collection;
 import java.util.Collections;
-import java.time.LocalDate;
+
+import woo.exceptions.*;
 
 /**
  * Class Store implements a store.
@@ -21,52 +21,32 @@ public class Store implements Serializable {
   private static final long serialVersionUID = 202009192006L;
 
   /** Suppliers. */
-  private Map<Integer, Supplier> _suppliers = new HashMap<Integer, Supplier>();
+  private Map<String, Supplier> _suppliers = new HashMap<String, Supplier>();
 
   /** Clients. */
-  private Map<Integer, Client> _clients = new HashMap<Integer, Client>();
+  private Map<String, Client> _clients = new HashMap<String, Client>();
 
-  /** Transactions. */
-  private Map<Integer, Transaction> _transactions = new HashMap<Integer, Transaction>();
-
-  /** Transaction counter. */
-  private int _transactionNumber = 0;
+  /** Products. */
+  private Map<String, Product> _products = new HashMap<String, Product>();
 
   /** Store constructor. */
-  public Store() {}
-  
+  public Store() {
+  }
+
   /**
    * Create and register supplier.
    * 
    * @param key
    * @param name
    * @param address
-   * @param status
    * @return the new supplier.
+   * @throws DuplicateSupplierKeyException
    */
-  public Supplier registerSupplier(int key, String name, String address, boolean status) throws DuplicateSupplierException {
+  public Supplier registerSupplier(String key, String name, String address) throws DuplicateSupplierKeyException {
     if (_suppliers.containsKey(key))
-      throw new DuplicateSupplierException(key, name, address, status);
-    Supplier supplier = new Supplier(key, name, address, status);
-    _suppliers.put(key, supplier);
-
-  }
-
-  /**
-   * Remove a supplier.
-   * 
-   * @param key
-   *          the supplier's key.
-   * 
-   * @return true, if the supplier was removed; false, otherwise.
-   */
-  public final boolean removeSupplier(int key) {
-    Supplier supplier = getSupplier(key);
-    if (supplier != null) {
-      _suppliers.remove(key);
-      return true;
-    }
-    return false;
+      throw new DuplicateSupplierKeyException(key);
+    Supplier supplier = new Supplier(key, name, address);
+    return _suppliers.put(key, supplier);
   }
 
   /**
@@ -81,49 +61,29 @@ public class Store implements Serializable {
   /**
    * Get the supplier with the given number.
    * 
-   * @param key
-   *          the supplier's number.
+   * @param key the supplier's number.
    * 
-   * @return the supplier or null if the number does not correspond to a
-   *         valkey supplier.
+   * @return the supplier or null if the number does not correspond to a valid
+   *         supplier.
    */
-  public Supplier getSupplier(int key) {
+  public Supplier getSupplier(String key) {
     return _suppliers.get(key);
   }
 
-   /**
+  /**
    * Create and register client.
    * 
-   * @param id
+   * @param key
    * @param name
    * @param address
-   * @param notifications
-   * @param pointsStatus
    * @return the new client.
+   * @throws DuplicateClientKeyException
    */
-  public Client registerClient(int id, String name, String notifications, boolean status) throws DuplicateClientException {
-    if (_clients.containsKey(id))
-      throw new DuplicateClientException(id, name, notifications, pointsStatus);
-    Client client = new Client(id, name, notifications, pointsStatus);
-    _clients.put(id, client);
-
-  }
-
-  /**
-   * Remove a client.
-   * 
-   * @param id
-   *          the client's id.
-   * 
-   * @return true, if the client was removed; false, otherwise.
-   */
-  public final boolean removeClient(int id) {
-    Client client = getClient(id);
-    if (client != null) {
-      _clients.remove(id);
-      return true;
-    }
-    return false;
+  public Client registerClient(String key, String name, String address) throws DuplicateClientKeyException {
+    if (_clients.containsKey(key))
+      throw new DuplicateClientKeyException(key);
+    Client client = new Client(key, name, address);
+    return _clients.put(key, client);
   }
 
   /**
@@ -138,80 +98,97 @@ public class Store implements Serializable {
   /**
    * Get the client with the given number.
    * 
-   * @param id
-   *          the client's number.
+   * @param id the client's number.
    * 
-   * @return the client or null if the number does not correspond to a
-   *         valid client.
+   * @return the client or null if the number does not correspond to a valid
+   *         client.
    */
-  public Client getClient(int id) {
-    return _clients.get(id);
+  public Client getClient(String key) {
+    return _clients.get(key);
   }
 
-   /**
-   * Create and register transaction.
+  /**
+   * Create and product box.
    * 
-   * @param id
-   * @param name
-   * @param address
-   * @param notifications
-   * @param pointsStatus
+   * @param key
+   * @param serviceType
+   * @param supplierKey
+   * @param price
+   * @param criticalValue
+   * @param units
+   * @param
    * @return the new transaction.
+   * @throws DuplicateProductKeyException
    */
-  public Transaction registerTransaction(int id, Datetime date) throws DuplicateTransactionException {
-    if (_transactions.containsKey(id))
-      throw new DuplicateTransactionException(id, date);
-    // LocalDate myObj = LocalDate.now();
-    Transaction transaction = new Transaction(id, date);
-    _transactions.put(id, transaction);
-
+  public Box registerProductBox(String key, String serviceType, String supplierKey, int price, int criticalValue,
+      int units) throws DuplicateProductKeyException {
+    if (_products.containsKey(key))
+      throw new DuplicateProductKeyException(key);
+    Box box = new Box(key, serviceType, supplierKey, price, criticalValue, units);
+    _products.put(key, box);
+    return box;
   }
 
   /**
-   * Remove a transaction.
+   * Create and product book.
    * 
-   * @param id
-   *          the transaction's id.
-   * 
-   * @return true, if the transaction was removed; false, otherwise.
+   * @param key
+   * @param title
+   * @param author
+   * @param isbn
+   * @param supplierKey
+   * @param price
+   * @param criticalValue
+   * @param units
+   * @param
+   * @return the new transaction.
+   * @throws DuplicateProductKeyException
    */
-  public final boolean removeTransaction(int id) {
-    Transaction transaction = getTransaction(id);
-    if (transaction != null) {
-      _transactions.remove(id);
-      return true;
-    }
-    return false;
+  public Book registerProductBook(String key, String title, String author, String isbn, String supplierKey, int price,
+      int criticalValue, int units) throws DuplicateProductKeyException {
+    if (_products.containsKey(key))
+      throw new DuplicateProductKeyException(key);
+    Book book = new Book(key, title, author, isbn, supplierKey, price, criticalValue, units);
+    _products.put(key, book);
+    return book;
   }
 
   /**
-   * Return all the transactions as an unmodifiable collection.
+   * Create and product book.
    * 
-   * @return a collection with all the transactions.
+   * @param key
+   * @param title
+   * @param author
+   * @param isbn
+   * @param supplierKey
+   * @param price
+   * @param criticalValue
+   * @param units
+   * @param
+   * @return the new transaction.
+   * @throws DuplicateProductKeyException
    */
-  public Collection<Transaction> getTransactions() {
-    return Collections.unmodifiableCollection(_transactions.values());
-  }
-
-  /**
-   * Get the transaction with the given number.
-   * 
-   * @param id
-   *          the transaction's number.
-   * 
-   * @return the transaction or null if the number does not correspond to a
-   *         valid transaction.
-   */
-  public Transaction getTransaction(int id) {
-    return _transactions.get(id);
+  public Container registerProductContainer(String serviceType, String serviceLevel, String key, String supplierKey,
+      int price, int criticalValue, int units) throws DuplicateProductKeyException {
+    if (_products.containsKey(key))
+      throw new DuplicateProductKeyException(key);
+    Container container = new Container(key, serviceType, serviceLevel, supplierKey, price, criticalValue, units);
+    _products.put(key, container);
+    return container;
   }
 
   /**
    * @param txtfile filename to be loaded.
    * @throws IOException
    * @throws BadEntryException
+   * @throws DuplicateClientKeyException
+   * @throws DuplicateProductKeyException
+   * @throws NumberFormatException
+   * @throws DuplicateSupplierKeyException
    */
-  void importFile(String txtfile) throws IOException, BadEntryException, FileNotFoundException {
+  void importFile(String txtfile) throws IOException, BadEntryException, FileNotFoundException,
+      DuplicateClientKeyException, NumberFormatException, DuplicateProductKeyException, DuplicateSupplierKeyException,
+      ImportFileException {
 
     int lineno = 0;
     try {
@@ -226,24 +203,24 @@ public class Store implements Serializable {
         String[] split = line.split("\\|");
         for (int i = 0; i < split.length; i++)
           if (split[0].equals("SUPPLIER"))
-            try {
-              store.registerSupplier(split[0][1], split[0][2], split[0][3]);
-            } catch (DuplicateSupplierException ih) {
-              System.err.println(ih);
-            }
+            registerSupplier(split[0], split[1], split[2]);
           else if (split[0].equals("CLIENT"))
-            try {
-              store.registerClient(split[0][1], split[0][2], split[0][3]);
-            } catch (DuplicateClientException ih) {
-              System.err.println(ih);
-            }
+            registerClient(split[1], split[2], split[3]);
+          else if (split[0].equals("BOX"))
+            registerProductBox(split[1], split[2], split[3], Integer.parseInt(split[4]), Integer.parseInt(split[5]),
+                Integer.parseInt(split[6]));
+          else if (split[0].equals("CONTAINER"))
+            registerProductContainer(split[1], split[2], split[3], split[4], Integer.parseInt(split[4]),
+                Integer.parseInt(split[5]), Integer.parseInt(split[6]));
+          else if (split[0].equals("BOOK"))
+            registerProductBook(split[1], split[2], split[3], split[4], split[5], Integer.parseInt(split[4]),
+                Integer.parseInt(split[5]), Integer.parseInt(split[6]));
       }
-
       in.close();
     } catch (FileNotFoundException e) {
       System.out.println("File not found: " + txtfile + ": " + e);
     } catch (IOException e) {
       System.out.println("IO error: " + txtfile + ": " + lineno + ": line " + e);
     }
-  
+  }
 }

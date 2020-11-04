@@ -10,10 +10,10 @@ import woo.Storefront;
 public class DoRegisterSupplier extends Command<Storefront> {
 
   /** Input field. */
-  Input<String> _name;
+  Input<String> _key;
 
   /** Input field. */
-  Input<Integer> _key;
+  Input<String> _name;
 
   /** Input field. */
   Input<String> _address;
@@ -23,18 +23,15 @@ public class DoRegisterSupplier extends Command<Storefront> {
     _name = _form.addStringInput(Messages.requestSupplierName());
     _key = _form.addIntegerInput(Messages.requestSupplierKey());
     _address = _form.addStringInput(Messages.requestSupplierAddress());
-    _status = _form.addStringInput(Messages.transactionsOn());
   }
 
   @Override
   public void execute() throws DialogException {
     _form.parse();
     try {
-      _receiver.addSupplier(_name.value(), _id.value());
-      _display.popup(Messages.createdSupplier(_name.value(), _key.value(), _address.value(), _status.value()));
-    } catch (DuplicateHolderException e) {
-      _display.popup("DUPLICATE WHILE TRYING; "
-          + Messages.createdSupplier(_name.value(), _key.value(), _address.value(), _status.value()));
+      _receiver.registerSupplier(_key.value(), _name.value(), _address.value());
+    } catch (DuplicateSupplierKeyException e) {
+        throw new DuplicateClientkeyException(e.getKey());
     }
   }
 

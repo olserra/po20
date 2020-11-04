@@ -19,7 +19,7 @@ public class DoToggleTransactions extends Command<Storefront> {
 
   @Override
   public void execute() throws DialogException {
-    
+    // FIXME add input fields
   }
 
 }
