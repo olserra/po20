@@ -15,7 +15,7 @@ public class DoShowClient extends Command<Storefront> {
 
   public DoShowClient(Storefront storefront) {
     super(Label.SHOW_CLIENT, storefront);
-    _key = _form.addStringInput(Messages.requestClientKey());
+    _key = _form.addStringInput(Message.requestClientKey());
   }
 
   @Override

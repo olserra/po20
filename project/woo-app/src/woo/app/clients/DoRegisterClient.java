@@ -5,7 +5,7 @@ import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import woo.Storefront;
 
-import woo.exceptions.*;
+import woo.exceptions.DuplicateClientKeyException;
 
 /**
  * Register new client.
@@ -23,9 +23,9 @@ public class DoRegisterClient extends Command<Storefront> {
 
   public DoRegisterClient(Storefront storefront) {
     super(Label.REGISTER_CLIENT, storefront);
-    _key = _form.addStringInput(Messages.requestSupplierKey());
-    _name = _form.addStringInput(Messages.requestSupplierName());
-    _address = _form.addStringInput(Messages.requestSupplierAddress());
+    _key = _form.addStringInput(Message.requestSupplierKey());
+    _name = _form.addStringInput(Message.requestSupplierName());
+    _address = _form.addStringInput(Message.requestSupplierAddress());
   }
 
   @Override
@@ -33,7 +33,7 @@ public class DoRegisterClient extends Command<Storefront> {
     _form.parse();
     try {
       _receiver.registerClient(_key.value(), _name.value(), _address.value());
-    } catch (DuplicateClientKeyException e) {
+    } catch (_DuplicateClientKeyException e) {
         throw new DuplicateClientkeyException(e.getKey());
     }
   }

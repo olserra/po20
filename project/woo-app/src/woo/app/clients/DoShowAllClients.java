@@ -1,6 +1,9 @@
 package woo.app.clients;
 
-import pt.tecnico.po.ui.Command;                                                                                                              import pt.tecnico.po.ui.DialogException;                                                                                                      import pt.tecnico.po.ui.Input;                                                                                                                import woo.Storefront;                                                                                                                        //FIXME import other classes
+import pt.tecnico.po.ui.Command;
+import pt.tecnico.po.ui.DialogException;
+import pt.tecnico.po.ui.Input;
+import woo.Storefront;
 
 /**
  * Show all clients.
@@ -13,8 +16,8 @@ public class DoShowAllClients extends Command<Storefront> {
 
   @Override
   public void execute() throws DialogException {
-    for (Client h : _receiver.getClients())
-      _display.addLine(h.toString());
+    for (Client c : _receiver.getClients())
+      _display.addLine(c.toString());
     _display.display();
   }
 }

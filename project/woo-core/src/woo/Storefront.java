@@ -15,6 +15,9 @@ import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+import java.util.Collection;
+import java.util.Collections;
+
 /**
  * Storefront: façade for the core classes.
  */
@@ -33,27 +36,39 @@ public class Storefront {
   /** The actual store. */
   private Store _store = new Store();
 
-  public Client DoRegisterClient(String key, String name, String address) throws DuplicateClientKeyException {
+  public Client registerClient(String key, String name, String address) throws DuplicateClientKeyException {
     return _store.registerClient(key, name, address);
   }
 
-  public Supplier DoRegisterSupplier(String key, String name, String address) throws DuplicateSupplierKeyException {
+  public Supplier registerSupplier(String key, String name, String address) throws DuplicateSupplierKeyException {
     return _store.registerSupplier(key, name, address);
   }
 
-  public Box DoRegisterProductBox(String key, String serviceType, String supplierKey, int price, int criticalValue,
+  public Box registerProductBox(String key, String serviceType, String supplierKey, int price, int criticalValue,
       int units) throws DuplicateProductKeyException {
     return _store.registerProductBox(key, serviceType, supplierKey, price, criticalValue, units);
   }
 
-  public Book DoRegisterProductBook(String key, String title, String author, String isbn, String supplierKey, int price,
+  public Book registerProductBook(String key, String title, String author, String isbn, String supplierKey, int price,
       int criticalValue, int units) throws DuplicateProductKeyException {
     return _store.registerProductBook(key, title, author, isbn, supplierKey, price, criticalValue, units);
   }
 
-  public Container DoRegisterProductContainer(String serviceType, String serviceLevel, String key, String supplierKey,
+  public Container registerProductContainer(String serviceType, String serviceLevel, String key, String supplierKey,
       int price, int criticalValue, int units) throws DuplicateProductKeyException {
     return _store.registerProductContainer(key, serviceType, serviceLevel, supplierKey, price, criticalValue, units);
+  }
+
+  public Collection<Supplier> getSuppliers() {
+    return _store.getSuppliers();
+  }
+
+  public Collection<Client> getClients() {
+    return _store.getSuppliers();
+  }
+
+  public Collection<Product> getProducts() {
+    return _store.getSuppliers();
   }
 
   /**
