@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="woo-core">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/project/woo-core/woo-core.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

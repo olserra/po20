@@ -9,13 +9,12 @@ public class DoShowSupplierTransactions extends Command<Storefront> {
 
   public DoShowSupplierTransactions(Storefront receiver) {
     super(Label.SHOW_SUPPLIER_TRANSACTIONS, receiver);
+    // FIXME
   }
 
   @Override
   public void execute() throws DialogException {
-    for (Transaction h : _receiver.getTransactions())
-      _display.addLine(h.toString());
-    _display.display();
+    // FIXME
   }
 
 }

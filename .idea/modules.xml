@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bank/po-ubank-app-201708311009/po-ubank-app-201708311009.iml" filepath="$PROJECT_DIR$/bank/po-ubank-app-201708311009/po-ubank-app-201708311009.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bank/po-ubank-core-201708311009/po-ubank-core-201708311009.iml" filepath="$PROJECT_DIR$/bank/po-ubank-core-201708311009/po-ubank-core-201708311009.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bank/po-uuilib-201708311009/po-uuilib-201708311009.iml" filepath="$PROJECT_DIR$/bank/po-uuilib-201708311009/po-uuilib-201708311009.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project/po-uuilib-201708311009/po-uuilib-2017083110091.iml" filepath="$PROJECT_DIR$/project/po-uuilib-201708311009/po-uuilib-2017083110091.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project-copy/project/po-uuilib-201708311009/po-uuilib-2017083110092.iml" filepath="$PROJECT_DIR$/project-copy/project/po-uuilib-201708311009/po-uuilib-2017083110092.iml" />
+      <module fileurl="file://$PROJECT_DIR$/po20.iml" filepath="$PROJECT_DIR$/po20.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project-copy/project/woo-app/woo-app.iml" filepath="$PROJECT_DIR$/project-copy/project/woo-app/woo-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project/woo-app/woo-app1.iml" filepath="$PROJECT_DIR$/project/woo-app/woo-app1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project/woo-core/woo-core.iml" filepath="$PROJECT_DIR$/project/woo-core/woo-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project-copy/project/woo-core/woo-core1.iml" filepath="$PROJECT_DIR$/project-copy/project/woo-core/woo-core1.iml" />
+    </modules>
+  </component>
+</project>

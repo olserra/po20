@@ -15,8 +15,8 @@ public class DoShowSuppliers extends Command<Storefront> {
 
   @Override
   public void execute() throws DialogException {
-    for (Supplier h : _receiver.getSuppliers())
-      _display.addLine(h.toString());
+    for (Supplier s : _receiver.getSuppliers())
+      _display.addLine(s.toString());
     _display.display();
   }
 }
