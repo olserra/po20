@@ -7,6 +7,8 @@ import woo.Storefront;
 
 import woo.exceptions.DuplicateClientKeyException;
 
+import woo.Client;
+
 /**
  * Register new client.
  */
@@ -23,9 +25,9 @@ public class DoRegisterClient extends Command<Storefront> {
 
   public DoRegisterClient(Storefront storefront) {
     super(Label.REGISTER_CLIENT, storefront);
-    _key = _form.addStringInput(Message.requestSupplierKey());
-    _name = _form.addStringInput(Message.requestSupplierName());
-    _address = _form.addStringInput(Message.requestSupplierAddress());
+    _key = _form.addStringInput(Message.requestClientKey());
+    _name = _form.addStringInput(Message.requestClientName());
+    _address = _form.addStringInput(Message.requestClientAddress());
   }
 
   @Override

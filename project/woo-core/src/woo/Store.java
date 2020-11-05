@@ -168,7 +168,7 @@ public class Store implements Serializable {
    * @return the new transaction.
    * @throws DuplicateProductKeyException
    */
-  public Container registerProductContainer(String serviceType, String serviceLevel, String key, String supplierKey,
+  public Container registerProductContainer(String key, String serviceType, String serviceLevel, String supplierKey,
       int price, int criticalValue, int units) throws DuplicateProductKeyException {
     if (_products.containsKey(key))
       throw new DuplicateProductKeyException(key);

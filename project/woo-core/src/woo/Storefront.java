@@ -54,21 +54,21 @@ public class Storefront {
     return _store.registerProductBook(key, title, author, isbn, supplierKey, price, criticalValue, units);
   }
 
-  public Container registerProductContainer(String serviceType, String serviceLevel, String key, String supplierKey,
+  public Container registerProductContainer(String key, String serviceType, String serviceLevel, String supplierKey,
       int price, int criticalValue, int units) throws DuplicateProductKeyException {
     return _store.registerProductContainer(key, serviceType, serviceLevel, supplierKey, price, criticalValue, units);
   }
 
-  public Collection<Supplier> getSuppliers() {
+  public Collection<Supplier> showSuppliers() {
     return _store.getSuppliers();
   }
 
-  public Collection<Client> getClients() {
-    return _store.getSuppliers();
+  public Collection<Client> showClients() {
+    return _store.getClients();
   }
 
-  public Collection<Product> getProducts() {
-    return _store.getSuppliers();
+  public Collection<Product> showProducts() {
+    return _store.getProducts();
   }
 
   /**
